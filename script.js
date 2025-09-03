@@ -119,3 +119,62 @@ document.getElementById("clear-btn").addEventListener("click", function () {
       .childNodes.forEach((div) => (div.innerHTML = ""))
   );
 });
+
+//copy to clipboard functionalities
+
+let copyClickCount = 0;
+
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".copy-btn");
+  if (!btn) return;
+
+  copyClickCount++;
+  console.log("Total copy button clicks:", copyClickCount);
+
+  const counterEl = document.getElementById("copy-counter");
+  if (counterEl) {
+    counterEl.innerText = copyClickCount;
+  }
+
+  const card = btn.closest(".card");
+  const sourceEl = card?.querySelector(".copy-text");
+  const toCopy = (btn.dataset.copy ?? sourceEl?.textContent ?? "").trim();
+
+  if (!toCopy) {
+    alert("Nothing to copy in this card.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(toCopy);
+    flashButton(btn, "Copied!");
+  } catch {
+    fallbackCopy(toCopy);
+    flashButton(btn, "Copied!");
+  }
+});
+
+function flashButton(btn, msg) {
+  const original = btn.textContent;
+  btn.textContent = msg;
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.disabled = false;
+  }, 1200);
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "absolute";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+  } finally {
+    document.body.removeChild(ta);
+  }
+}
