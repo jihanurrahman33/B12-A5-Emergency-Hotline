@@ -33,7 +33,7 @@
 
                     <div
                         class="flex items-center bg-[#41ff6b1a] px-4 py-2 sm:px-6 sm:py-3 font-semibold rounded-full gap-2 shrink-0">
-                        <p>100</p>
+                        <p id="call-credit">100</p>
                         <img class="h-6 w-6" src="./assets/coin.png" alt="coins" />
                     </div>
 
@@ -251,16 +251,11 @@
             <aside class=" call-history bg-white p-6 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.2)]">
                 <div class="flex items-center justify-between mb-[16px]">
                     <div class="flex items-center"><i class="fa-regular fa-clock"></i><h1 class="font-bold">Call History</h1></div>
-                    <div><button class="btn rounded-[50px] px-[36px] py-[12px] bg-[#00A63E] text-white">Clear</button></div>
+                    <div><button id="clear-btn" class="btn rounded-[50px] px-[36px] py-[12px] bg-[#00A63E] text-white">Clear</button></div>
                 </div>
-                <div class="flex items-center justify-between rounded-[8px] gap-4 bg-[#FAFAFA] p-4">
-                    <div>
-                        <h1 class="font-semibold text-[18px]">Fire Service Number</h1>
-                        <p class="text-[gray] hind-madurai-regular text-[18px]">999</p>
-                    </div>
-                    <div>
-                        <p class="hind-madurai-regular">11:36:58 AM</p>
-                    </div>
+                <div id="history-parent">
+                    
+                </div>
                 </div>
             </aside>
         </section>
